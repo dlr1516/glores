@@ -1,0 +1,22 @@
+Params:
+cfg 
+dst ../data/intel-lab_scan_00229.dat
+fileIn 1
+noiseSigma 0.01
+optDepthMax 50
+optInlierRatio 0.98
+optIterationMax 210
+optVerboseLevel 0
+optXTol 0.2
+optYTol 0.0001
+scanDistMax 10
+src ../data/intel-lab_scan_00226.dat
+tx 2.1
+ty -3
+rot 42
+txL -30.0
+txU +30.0
+tyL -30.0
+tyU +30.0
+rotL 0
+rotU 359.999

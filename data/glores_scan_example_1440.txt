@@ -1,0 +1,27 @@
+Params:
+cfg 
+dst ../data/laser_20180412_104005_scan_06800.dat
+fileIn 1
+noiseSigma 0.01
+optDepthMax 50
+optInlierRatio 0.8
+optIterationMax 10000
+optRelaxX 0.8
+optRelaxY 0.8
+optRelaxT 0.8
+optRelaxationBoundOn 0
+optVerboseLevel 0
+optXTol 0.2
+optYTol 0.001
+scanDistMax 40.0
+scanSampleRate 2.0
+src ../data/laser_20180412_104005_scan_04400.dat
+tx 2.1
+ty -3
+rot 42
+txL -10.0
+txU +10.0
+tyL -10.0
+tyU +10.0
+rotL 0
+rotU 359.99

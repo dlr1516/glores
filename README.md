@@ -36,3 +36,18 @@ If Matlab (we tested version R2018a=9.4) is available, it also compiles the glor
 extension.
 Other dependencies are placed in directories named thirdparty/. 
 
+
+QUICK START
+-------------------------------------------------
+
+After compiling glores library and the related applications, you can test the algorithm calling:
+
+${glores_ROOT}/build/testPointSetGlobalRegistration -cfg ../data/glores_scan_example_0180.txt
+
+Similarly,
+
+${glores_ROOT}/build/testPointSetGlobalRegistration -cfg ../data/glores_scan_example_1440.txt
+
+Configuration files glores_scan_example_0180.txt and glores_scan_example_1440.txt sets 
+the parameters of the algorthm. 
+
