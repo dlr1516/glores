@@ -32,7 +32,7 @@ The software depends on the following external libraries
 - Boost 
 - Eigen 3.0 
 
-Other dependencies are placed in directory thirdparty. 
-
-
+If Matlab (we tested version R2018a=9.4) is available, it also compiles the glores_mex 
+extension.
+Other dependencies are placed in directories named thirdparty/. 
 
