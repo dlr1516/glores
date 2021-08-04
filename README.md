@@ -11,14 +11,14 @@ It has been kept to a minimal design.
 If you use this library, please cite the following paper: 
 
 L. Consolini, M. Laurini, M. Locatelli, D. Lodi Rizzini. 
-Globally Optimal Registration based on Fast Branch and Bound. 
+A Second-Order Lower Bound for Globally Optimal 2D Registration. 
 under review, 
 arXiv [arXiv:1901.09641](https://arxiv.org/abs/1901.09641).
 
 ````
 @misc{consolini2019glores,
   author={Consolini, L. and Laurini, M. and Locatelli, M. and Lodi Rizzini, D.},
-  title = {Globally Optimal Registration based on Fast Branch and Bound},
+  title = {A Second-Order Lower Bound for Globally Optimal 2D Registration},
   Year = {2019},
   Eprint = {arXiv:1901.09641},
 }
