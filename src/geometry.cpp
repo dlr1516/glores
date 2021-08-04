@@ -284,6 +284,7 @@ namespace glores {
         //        for (auto pit = boost::begin(boost::geometry::exterior_ring(convexBound)); pit != boost::end(boost::geometry::exterior_ring(convexBound)); ++pit) {
         //            std::cout << "  " << pit->transpose() << "\n";
         //        }
+        return true;
     }
 
     bool computeDistanceMinMax(const Point2d& pSrc, const Point2d& pDst, const Eigen::Vector3d& poseLow, const Eigen::Vector3d& poseUpp, double& dmin, double& dmax) {

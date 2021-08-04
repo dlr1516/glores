@@ -130,6 +130,7 @@ namespace glores {
                 setParam(paramName, defaultValue);
                 return false;
             }
+            return true;
         }
 
     protected:

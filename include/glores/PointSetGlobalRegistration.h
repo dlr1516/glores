@@ -293,6 +293,7 @@ namespace glores {
          */
         bool setVerboseLevel(int vl) {
             verboseLevel_ = vl;
+            return true;
         }
 
         void setIterationMax(int imax) {

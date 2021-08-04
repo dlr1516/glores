@@ -83,6 +83,7 @@ namespace glores {
             }
             ++argi;
         }
+        return true;
     }
 
     bool ParamMap::write(std::ostream& out) const {
