@@ -32,6 +32,8 @@ void saturateRanges(glores::VectorPoint2d& points, double distMax);
 
 void samplePoints(glores::VectorPoint2d& points, double sampleRate);
 
+void subtractCenter(glores::VectorPoint2d &points);
+
 void printPointSets(std::ostream& out, const Eigen::VectorXd & pose, glores::VectorPoint2d pointSrc, glores::VectorPoint2d pointDst);
 
 int main(int argc, char** argv) {
@@ -52,7 +54,7 @@ int main(int argc, char** argv) {
     glores::PointSetGlobalRegistration optimizer;
     //glores::FastPointSetGlobalRegistration optimizer;
     glores::ParamMap params;
-    bool fileInputOn;
+    bool fileInputOn, subtractCenterOn;
 
     // Random noise
     //std::random_device noiseRd;
@@ -92,11 +94,12 @@ int main(int argc, char** argv) {
     params.getParam<bool>("optRelaxationBoundOn", optRelaxationBoundOn, bool(true));
     params.getParam<bool>("optCheaBoundQueueOn", optCheaBoundQueueOn, bool(true));
     params.getParam<double>("noiseSigma", noiseSigma, double(0.01));
-    params.getParam<bool>("fileIn", fileInputOn, bool(false));
+    params.getParam<bool>("fileIn", fileInputOn, bool(true));
     params.getParam<std::string>("src", filenameSrc, std::string(""));
     params.getParam<std::string>("dst", filenameDst, std::string(""));
     params.getParam<double>("scanDistMax", scanDistMax, double(10.0));
     params.getParam<double>("scanSampleRate", scanSampleRate, double(1.0));
+    params.getParam<bool>("subtractCenterOn", subtractCenterOn, bool(true));
 
 
     std::cout << "\nParams:\n";
@@ -112,14 +115,14 @@ int main(int argc, char** argv) {
         glores::loadPointMatrix(fileSrc, pointsSrc, ",");
         fileSrc.close();
 
-        std::cout << "Point sources:\n";
-        for (auto& p : pointsSrc) {
-            std::cout << "  " << p.transpose() << "\n";
-        }
+//        std::cout << "Point sources:\n";
+//        for (auto& p : pointsSrc) {
+//            std::cout << "  " << p.transpose() << "\n";
+//        }
 
         std::cout << "Read " << pointsSrc.size() << " source points" << std::endl;
-        saturateRanges(pointsSrc, scanDistMax);
-        samplePoints(pointsSrc, scanSampleRate);
+        //saturateRanges(pointsSrc, scanDistMax);
+        //samplePoints(pointsSrc, scanSampleRate);
         std::cout << "Filtered: " << pointsSrc.size() << " source points" << std::endl;
 
         std::ifstream fileDst(filenameDst);
@@ -129,14 +132,14 @@ int main(int argc, char** argv) {
         }
         glores::loadPointMatrix(fileDst, pointsDst, ",");
         fileDst.close();
-        std::cout << "Point destination:\n";
-        for (auto& p : pointsDst) {
-            std::cout << "  " << p.transpose() << "\n";
-        }
+//        std::cout << "Point destination:\n";
+//        for (auto& p : pointsDst) {
+//            std::cout << "  " << p.transpose() << "\n";
+//        }
 
         std::cout << "Read " << pointsDst.size() << " destination points" << std::endl;
-        saturateRanges(pointsDst, scanDistMax);
-        samplePoints(pointsDst, scanSampleRate);
+        //saturateRanges(pointsDst, scanDistMax);
+        //samplePoints(pointsDst, scanSampleRate);
         std::cout << "Filtered: " << pointsDst.size() << " destination points" << std::endl;
     } else {
         // Inserts few points to be matched
@@ -194,6 +197,12 @@ int main(int argc, char** argv) {
         }
     }
     poseCoder << 2.0999, -2.9932, 0.7339;
+
+    if (subtractCenterOn) {
+    	std::cout << "*** Subtracted center to input points" << std::endl;
+    	subtractCenter(pointsSrc);
+    	subtractCenter(pointsDst);
+    }
 
     // Optimizer
     optimizer.setPointSource(pointsSrc);
@@ -275,6 +284,24 @@ void samplePoints(glores::VectorPoint2d& points, double sampleRate) {
         //GLORES_PRINT_VARIABLE(sampleFrac);
     }
     points.swap(tmp);
+}
+
+void subtractCenter(glores::VectorPoint2d &points) {
+	glores::Point2d center = glores::Point2d::Zero();
+	size_t num = points.size();
+
+	if (points.empty()) {
+		return;
+	}
+
+	for (int i = 0; i < num; ++i) {
+		center += points[i];
+	}
+	center = center * 1.0 / num;
+
+	for (int i = 0; i < num; ++i) {
+		points[i] = points[i] - center;
+	}
 }
 
 void printPointSets(std::ostream& out, const Eigen::VectorXd & pose, glores::VectorPoint2d pointSrc, glores::VectorPoint2d pointDst) {

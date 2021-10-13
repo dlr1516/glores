@@ -117,8 +117,9 @@ namespace glores {
             // Visits each token and converts to
             count = 0;
             for (auto it = tokens.begin(); it != tokens.end() && count < 2; ++it, ++count) {
-                //GLORES_PRINT_VARIABLE(*it);
-                p(count) = boost::lexical_cast<double>(*it);
+	        //GLORES_PRINT_VARIABLE(*it);
+                //p(count) = boost::lexical_cast<double>(*it);
+                p(count) = atof(std::string(*it).c_str());
                 //GLORES_PRINT_VARIABLE(count);
             }
             if (count >= 2) {

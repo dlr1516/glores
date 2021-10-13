@@ -936,6 +936,9 @@ namespace glores {
                 //lowerBests.push_back(ib.pointDistancesMin[is][0].distBound);
             } else {
                 GLORES_PRINT_ERROR("no resisuals for src point " << is);
+                for (int j = 0; j < ib.pointDistancesMin.size(); ++j) {
+                	std::cout << "queue of point " << j << " has size " << ib.pointDistancesMin[j].size() << std::endl;
+                }
                 GLORES_ASSERT(0);
             }
         }
